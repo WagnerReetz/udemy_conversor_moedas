@@ -32,14 +32,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  MoneyMaskedTextController realController =
+  final MoneyMaskedTextController realController =
       MoneyMaskedTextController(decimalSeparator: ',');
-  MoneyMaskedTextController dolarController =
+  final MoneyMaskedTextController dolarController =
       MoneyMaskedTextController(decimalSeparator: ',');
-  MoneyMaskedTextController euroController =
+  final MoneyMaskedTextController euroController =
       MoneyMaskedTextController(decimalSeparator: ',');
-
-  //final real2Controler = MaskTextInputFormatter
 
   double dolar;
   double euro;
@@ -92,15 +90,26 @@ class _HomeState extends State<Home> {
     euroController.text = "";
   }
 
+  void _resetFields() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.amber,
-        title: Text(" \$ Conversor \$"),
-        centerTitle: true,
-      ),
+          backgroundColor: Colors.amber,
+          title: Text(" \$ Conversor \$"),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.refresh),
+                //color: Colors.green,
+                onPressed: () {
+                  _resetFields();
+                })
+          ]),
       body: FutureBuilder<Map>(
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
